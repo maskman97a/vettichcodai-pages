@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>TikTok OAuth Callback — Vết Tích Cổ Đại</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body{font-family:system-ui,-apple-system,Arial,sans-serif;max-width:680px;margin:48px auto;padding:0 18px;line-height:1.6;color:#111}
+  h2{font-size:22px}
+  .code{background:#f4f4f5;border:1px solid #ddd;border-radius:8px;padding:14px;word-break:break-all;font-family:ui-monospace,Menlo,monospace;font-size:15px}
+  .muted{color:#666;font-size:14px}
+  button{margin-top:10px;padding:9px 16px;border-radius:6px;border:1px solid #888;background:#fff;cursor:pointer;font-size:15px}
+  button:hover{background:#f0f0f0}
+</style>
+</head>
+<body>
+  <h2>🔑 Authorization code</h2>
+  <p class="muted">Copy đoạn code dưới đây và paste lại cho công cụ <code>tiktok_oauth.py</code>.</p>
+  <div class="code" id="code">(đang đọc…)</div>
+  <button onclick="navigator.clipboard.writeText(document.getElementById('code').textContent).then(()=>this.textContent='✓ Đã copy')">Copy code</button>
+  <p class="muted" id="full" style="margin-top:24px"></p>
+  <script>
+    const p = new URLSearchParams(location.search);
+    const code = p.get('code'), err = p.get('error');
+    document.getElementById('code').textContent =
+      code ? code
+      : err ? ('LỖI: ' + err + ' — ' + (p.get('error_description') || ''))
+      : 'Không thấy "code" trên URL. Hãy chạy lại bước authorize.';
+    document.getElementById('full').textContent = 'URL đầy đủ: ' + location.href;
+  </script>
+</body>
+</html>
